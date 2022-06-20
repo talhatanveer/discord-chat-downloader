@@ -2,6 +2,9 @@ import os, json
 from time import sleep
 from api import discord_api
 
+if not os.path.exists("data"):
+    os.mkdir("data")
+
 if not os.path.exists(".token"):
     print("No Authorization Token Found!")
     print("See README.md for how to find your authorization token")
@@ -77,8 +80,9 @@ while True:
                 else:
                     last_message_id = msgs[len(msgs) - 1]['id']
         
+        ## Save Messages to File
         print(f"Fetched a total of {counter} messages")
-        with open(file, 'w+') as f:
+        with open(f"data/{file}", 'w+') as f:
             f.write(json.dumps(messages, indent = 2))
             f.close()
         print('Messages Saved!')
