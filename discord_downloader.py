@@ -53,7 +53,7 @@ while True:
 
         last_message_id = 0
         counter = 0
-
+        i = 0
         while True:
             print(f'Fetching Messages ({counter} total)')
 
@@ -72,13 +72,13 @@ while True:
                 print("Rate limited ... waiting 5 seconds before retrying")
                 sleep(5)
             else:
-                messages.extend(msgs)
+                messages[:0] = msgs
                 counter += len(msgs)
 
                 if len(msgs) < 100:
                     break
                 else:
-                    last_message_id = msgs[len(msgs) - 1]['id']
+                    last_message_id = msgs[0]['id']
         
         ## Save Messages to File
         print(f"Fetched a total of {counter} messages")
